@@ -66,10 +66,11 @@ class PratoApiTest extends TestCase
     {
         $prato = Prato::factory()->create(['preco' => 10]);
 
-        $this->putJson("/api/pratos/{$prato->id}", ['nome' => $prato->nome, 'preco' => 12.9, 'disponivel' => false])
+        $this->putJson("/api/pratos/{$prato->id}", ['nome' => $prato->nome, 'preco' => 12.9, 'disponivel' => false, 'destaque' => true])
             ->assertOk()
             ->assertJsonPath('data.preco', 12.9)
-            ->assertJsonPath('data.disponivel', false);
+            ->assertJsonPath('data.disponivel', false)
+            ->assertJsonPath('data.destaque', true);
     }
 
     public function test_move_prato_para_outra_categoria(): void

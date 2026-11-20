@@ -18,8 +18,8 @@ class CardapioSeeder extends Seeder
             'descricao' => 'Pratos do dia com arroz, feijão e salada',
             'pratos' => [
                 ['nome' => 'Frango grelhado', 'descricao' => 'Peito de frango, arroz, feijão e salada', 'preco' => 18.90, 'foto' => '1788227372897-49ec292a9406'],
-                ['nome' => 'Carne de sol com macaxeira', 'descricao' => 'Acompanha arroz e vinagrete', 'preco' => 24.90, 'foto' => '1678684277852-f63a7e359435'],
-                ['nome' => 'Peixe ao molho', 'descricao' => 'Filé de tilápia, arroz e pirão', 'preco' => 22.50, 'foto' => '1621174438159-6a9a82405498'],
+                ['nome' => 'Carne de sol com macaxeira', 'descricao' => 'Acompanha arroz e vinagrete', 'preco' => 24.90, 'destaque' => true, 'foto' => '1678684277852-f63a7e359435'],
+                ['nome' => 'Peixe ao molho', 'descricao' => 'Filé de tilápia, arroz e pirão', 'preco' => 22.50, 'destaque' => true, 'foto' => '1621174438159-6a9a82405498'],
             ],
         ],
         'Bebidas' => [
@@ -32,7 +32,7 @@ class CardapioSeeder extends Seeder
         'Sobremesas' => [
             'descricao' => 'Doces caseiros',
             'pratos' => [
-                ['nome' => 'Pudim de leite', 'descricao' => 'Fatia generosa com calda de caramelo', 'preco' => 8.00, 'foto' => '1702728109878-c61a98d80491'],
+                ['nome' => 'Pudim de leite', 'descricao' => 'Fatia generosa com calda de caramelo', 'preco' => 8.00, 'destaque' => true, 'foto' => '1702728109878-c61a98d80491'],
             ],
         ],
     ];

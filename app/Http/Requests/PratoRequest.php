@@ -19,6 +19,7 @@ class PratoRequest extends FormRequest
             'imagem_url' => ['nullable', 'url:https', 'max:500'],
             'preco' => ['required', 'numeric', 'gt:0', 'max:99999.99'],
             'disponivel' => ['sometimes', 'boolean'],
+            'destaque' => ['sometimes', 'boolean'],
         ];
     }
 
@@ -36,6 +37,7 @@ class PratoRequest extends FormRequest
             'preco.gt' => 'O preço deve ser maior que zero.',
             'preco.max' => 'O preço deve ser no máximo R$ 99.999,99.',
             'disponivel.boolean' => 'O campo disponível deve ser verdadeiro ou falso.',
+            'destaque.boolean' => 'O campo destaque deve ser verdadeiro ou falso.',
         ];
     }
 }

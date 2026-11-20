@@ -12,15 +12,16 @@ class Prato extends Model
 
     protected $table = 'pratos';
 
-    protected $fillable = ['categoria_id', 'nome', 'descricao', 'imagem_url', 'preco', 'disponivel'];
+    protected $fillable = ['categoria_id', 'nome', 'descricao', 'imagem_url', 'preco', 'disponivel', 'destaque'];
 
-    protected $attributes = ['disponivel' => true];
+    protected $attributes = ['disponivel' => true, 'destaque' => false];
 
     protected function casts(): array
     {
         return [
             'preco' => 'decimal:2',
             'disponivel' => 'boolean',
+            'destaque' => 'boolean',
         ];
     }
 
