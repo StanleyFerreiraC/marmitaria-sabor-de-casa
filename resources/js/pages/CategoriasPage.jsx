@@ -6,6 +6,7 @@ import { useDados } from '../hooks/useDados';
 import { useExclusao } from '../hooks/useExclusao';
 import { categoriaService } from '../services/categoriaService';
 import { botao, cartao } from '../utils/estilos';
+import { rotas } from '../utils/rotas';
 
 export default function CategoriasPage() {
     const { dados: categorias, carregando, erro, recarregar } = useDados(categoriaService.listar, []);
@@ -16,7 +17,7 @@ export default function CategoriasPage() {
             <CabecalhoPagina
                 titulo="Categorias"
                 subtitulo="Organize o cardápio em categorias e cadastre os pratos de cada uma."
-                acoes={<Link to="/categorias/nova" className={botao.primario}>Nova categoria</Link>}
+                acoes={<Link to={rotas.novaCategoria()} className={botao.primario}>+ Nova categoria</Link>}
             />
             <Mensagem tipo="sucesso">{exclusao.sucesso}</Mensagem>
             <Mensagem tipo="erro">{exclusao.erro}</Mensagem>
@@ -29,28 +30,24 @@ export default function CategoriasPage() {
 
 function ListaCategorias({ categorias, aoExcluir }) {
     if (categorias.length === 0) {
-        return <p className={`${cartao} p-8 text-center text-sm text-stone-500`}>Nenhuma categoria cadastrada ainda.</p>;
+        return <p className={`${cartao} p-8 text-center text-sm text-cafe-claro`}>Nenhuma categoria cadastrada ainda.</p>;
     }
 
     return (
         <ul className="grid gap-3">
             {categorias.map((categoria) => (
-                <li key={categoria.id} className={`${cartao} flex flex-wrap items-center justify-between gap-4 p-4`}>
+                <li key={categoria.id} className={`${cartao} flex flex-wrap items-center justify-between gap-4 border-l-4 border-l-acafrao p-4`}>
                     <div>
-                        <h2 className="font-semibold text-stone-900">{categoria.nome}</h2>
-                        {categoria.descricao && <p className="text-sm text-stone-500">{categoria.descricao}</p>}
-                        <p className="mt-1 text-xs text-stone-400">
+                        <h2 className="font-display text-xl font-semibold text-cafe">{categoria.nome}</h2>
+                        {categoria.descricao && <p className="text-sm text-cafe-claro">{categoria.descricao}</p>}
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-barro">
                             {categoria.quantidade_pratos} {categoria.quantidade_pratos === 1 ? 'prato' : 'pratos'}
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                        <Link to={`/categorias/${categoria.id}/pratos`} className={botao.primario}>Ver pratos</Link>
-                        <Link to={`/categorias/${categoria.id}/editar`} className={botao.secundario}>Editar</Link>
-                        <button
-                            type="button"
-                            className={botao.perigo}
-                            onClick={() => aoExcluir(categoria.id, categoria.nome)}
-                        >
+                        <Link to={rotas.pratos(categoria.id)} className={botao.primario}>Ver pratos</Link>
+                        <Link to={rotas.editarCategoria(categoria.id)} className={botao.secundario}>Editar</Link>
+                        <button type="button" className={botao.perigo} onClick={() => aoExcluir(categoria.id, categoria.nome)}>
                             Excluir
                         </button>
                     </div>

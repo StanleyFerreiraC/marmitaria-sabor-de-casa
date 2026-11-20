@@ -6,6 +6,14 @@ function estaVazio(valor) {
     return String(valor ?? '').trim() === '';
 }
 
+function ehEnderecoHttps(valor) {
+    try {
+        return new URL(valor).protocol === 'https:';
+    } catch {
+        return false;
+    }
+}
+
 export function validarCategoria({ nome }) {
     const erros = {};
     if (estaVazio(nome)) {
@@ -14,7 +22,7 @@ export function validarCategoria({ nome }) {
     return erros;
 }
 
-export function validarPrato({ nome, preco }) {
+export function validarPrato({ nome, preco, imagem_url: imagemUrl }) {
     const erros = {};
     if (estaVazio(nome)) {
         erros.nome = 'O nome do prato é obrigatório.';
@@ -23,6 +31,20 @@ export function validarPrato({ nome, preco }) {
         erros.preco = 'O preço é obrigatório.';
     } else if (!(Number(preco) > 0)) {
         erros.preco = 'O preço deve ser maior que zero.';
+    }
+    if (!estaVazio(imagemUrl) && !ehEnderecoHttps(imagemUrl)) {
+        erros.imagem_url = 'Informe um endereço de imagem válido, começando com https://.';
+    }
+    return erros;
+}
+
+export function validarLogin({ email, senha }) {
+    const erros = {};
+    if (estaVazio(email)) {
+        erros.email = 'Informe o e-mail.';
+    }
+    if (estaVazio(senha)) {
+        erros.senha = 'Informe a senha.';
     }
     return erros;
 }

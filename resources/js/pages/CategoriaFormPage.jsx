@@ -8,6 +8,7 @@ import { useDados } from '../hooks/useDados';
 import { useFormulario } from '../hooks/useFormulario';
 import { categoriaService } from '../services/categoriaService';
 import { cartao } from '../utils/estilos';
+import { rotas } from '../utils/rotas';
 import { validarCategoria } from '../utils/validacoes';
 
 /**
@@ -43,7 +44,7 @@ function FormularioCategoria({ categoria }) {
             } else {
                 await categoriaService.criar(dados);
             }
-            navigate('/categorias', { state: { sucesso: `Categoria "${valores.nome}" salva com sucesso.` } });
+            navigate(rotas.categorias(), { state: { sucesso: `Categoria "${valores.nome}" salva com sucesso.` } });
         },
     });
 
@@ -69,7 +70,7 @@ function FormularioCategoria({ categoria }) {
                 onChange={formulario.alterarCampo}
                 erro={formulario.erros.descricao}
             />
-            <BotoesFormulario enviando={formulario.enviando} voltarPara="/categorias" />
+            <BotoesFormulario enviando={formulario.enviando} voltarPara={rotas.categorias()} />
         </form>
     );
 }

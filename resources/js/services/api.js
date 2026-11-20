@@ -1,5 +1,7 @@
 /**
  * Cliente HTTP único da aplicação: toda chamada ao serviço web passa por aqui.
+ * A autenticação usa o cookie de sessão do Laravel Sanctum; requisições que alteram dados
+ * enviam o token CSRF lido do cookie XSRF-TOKEN.
  */
 export class ErroApi extends Error {
     constructor(mensagem, status, errosDeCampo = {}) {
@@ -12,13 +14,39 @@ export class ErroApi extends Error {
 const MENSAGEM_SEM_CONEXAO = 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.';
 const MENSAGEM_VALIDACAO = 'Corrija os campos destacados.';
 const MENSAGEM_ERRO_SERVIDOR = 'Erro no servidor. Tente novamente em instantes.';
+const MENSAGEM_SESSAO_EXPIRADA = 'Sua sessão expirou. Entre novamente.';
+
+let aoPerderSessao = () => {};
+
+/** Define o que fazer quando o servidor responde que o gerente não está mais logado. */
+export function definirAoPerderSessao(funcao) {
+    aoPerderSessao = funcao;
+}
+
+function lerCookie(nome) {
+    const encontrado = document.cookie.match(new RegExp(`(?:^|; )${nome}=([^;]*)`));
+    return encontrado ? decodeURIComponent(encontrado[1]) : null;
+}
+
+async function cabecalhoCsrf() {
+    if (!lerCookie('XSRF-TOKEN')) {
+        await fetch('/sanctum/csrf-cookie', { credentials: 'same-origin' });
+    }
+    return { 'X-XSRF-TOKEN': lerCookie('XSRF-TOKEN') ?? '' };
+}
 
 async function requisitar(metodo, caminho, corpo) {
+    const alteraDados = metodo !== 'GET';
     let resposta;
     try {
         resposta = await fetch(`/api${caminho}`, {
             method: metodo,
-            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                ...(alteraDados ? await cabecalhoCsrf() : {}),
+            },
             body: corpo === undefined ? undefined : JSON.stringify(corpo),
         });
     } catch {
@@ -38,6 +66,10 @@ async function requisitar(metodo, caminho, corpo) {
 }
 
 function criarErro(status, conteudo) {
+    if (status === 401 || status === 419) {
+        aoPerderSessao();
+        return new ErroApi(status === 419 ? MENSAGEM_SESSAO_EXPIRADA : conteudo.message, status);
+    }
     if (status === 422) {
         return new ErroApi(MENSAGEM_VALIDACAO, status, primeiraMensagemPorCampo(conteudo.errors));
     }

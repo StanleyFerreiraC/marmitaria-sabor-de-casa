@@ -1,6 +1,6 @@
 const ESTILO_POR_TIPO = {
-    sucesso: 'border-green-200 bg-green-50 text-green-800',
-    erro: 'border-red-200 bg-red-50 text-red-800',
+    sucesso: 'border-folha/30 bg-folha-claro text-folha',
+    erro: 'border-barro/30 bg-barro/10 text-barro-escuro',
 };
 
 export default function Mensagem({ tipo, children }) {
@@ -9,7 +9,7 @@ export default function Mensagem({ tipo, children }) {
     }
 
     return (
-        <div role={tipo === 'erro' ? 'alert' : 'status'} className={`mb-4 rounded-lg border px-4 py-3 text-sm ${ESTILO_POR_TIPO[tipo]}`}>
+        <div role={tipo === 'erro' ? 'alert' : 'status'} className={`mb-4 rounded-xl border px-4 py-3 text-sm font-medium ${ESTILO_POR_TIPO[tipo]}`}>
             {children}
         </div>
     );

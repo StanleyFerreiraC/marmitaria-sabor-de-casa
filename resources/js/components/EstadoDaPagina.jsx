@@ -5,7 +5,7 @@ import Mensagem from './Mensagem';
  */
 export default function EstadoDaPagina({ carregando, erro, children }) {
     if (carregando) {
-        return <p className="py-10 text-center text-sm text-stone-500">Carregando...</p>;
+        return <p className="py-10 text-center text-sm text-cafe-claro">Carregando...</p>;
     }
     if (erro) {
         return <Mensagem tipo="erro">{erro}</Mensagem>;

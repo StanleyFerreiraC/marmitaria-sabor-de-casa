@@ -3,7 +3,28 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/*
+ * Paleta "cozinha do sertão": barro de panela, açafrão, folha de bananeira e café,
+ * sobre um fundo creme de farinha de mandioca.
+ */
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+
+    --color-creme: #fbf4e8;
+    --color-creme-escuro: #efe2c9;
+    --color-barro: #b4472b;
+    --color-barro-escuro: #8e3520;
+    --color-acafrao: #e2a63b;
+    --color-acafrao-claro: #f8e3b4;
+    --color-folha: #3d6b45;
+    --color-folha-claro: #dcebd8;
+    --color-cafe: #2b1d16;
+    --color-cafe-claro: #6f5a4e;
+}
+
+body {
+    background-color: var(--color-creme);
+    color: var(--color-cafe);
 }
