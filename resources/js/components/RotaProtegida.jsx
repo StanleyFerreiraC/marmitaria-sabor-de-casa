@@ -10,7 +10,7 @@ export default function RotaProtegida() {
     const location = useLocation();
 
     if (verificando) {
-        return <p className="py-20 text-center text-sm text-cafe-claro">Verificando acesso...</p>;
+        return <p className="py-20 text-center text-sm text-texto-suave">Verificando acesso...</p>;
     }
     if (!usuario) {
         return <Navigate to={rotas.login()} replace state={{ voltarPara: location.pathname }} />;

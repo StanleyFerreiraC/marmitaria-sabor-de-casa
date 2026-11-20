@@ -30,17 +30,17 @@ export default function CategoriasPage() {
 
 function ListaCategorias({ categorias, aoExcluir }) {
     if (categorias.length === 0) {
-        return <p className={`${cartao} p-8 text-center text-sm text-cafe-claro`}>Nenhuma categoria cadastrada ainda.</p>;
+        return <p className={`${cartao} p-8 text-center text-sm text-texto-suave`}>Nenhuma categoria cadastrada ainda.</p>;
     }
 
     return (
         <ul className="grid gap-3">
             {categorias.map((categoria) => (
-                <li key={categoria.id} className={`${cartao} flex flex-wrap items-center justify-between gap-4 border-l-4 border-l-acafrao p-4`}>
+                <li key={categoria.id} className={`${cartao} flex flex-wrap items-center justify-between gap-4 border-l-4 border-l-destaque p-4`}>
                     <div>
-                        <h2 className="font-display text-xl font-semibold text-cafe">{categoria.nome}</h2>
-                        {categoria.descricao && <p className="text-sm text-cafe-claro">{categoria.descricao}</p>}
-                        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-barro">
+                        <h2 className="font-display text-lg font-extrabold uppercase text-texto">{categoria.nome}</h2>
+                        {categoria.descricao && <p className="text-sm text-texto-suave">{categoria.descricao}</p>}
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-destaque">
                             {categoria.quantidade_pratos} {categoria.quantidade_pratos === 1 ? 'prato' : 'pratos'}
                         </p>
                     </div>

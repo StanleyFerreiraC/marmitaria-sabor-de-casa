@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#120c08">
     <title>Sabor de Casa · Cardápio digital</title>
     @fonts
     @viteReactRefresh

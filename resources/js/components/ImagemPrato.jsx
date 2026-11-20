@@ -11,7 +11,7 @@ export default function ImagemPrato({ url, nome, className = '' }) {
             <div
                 role="img"
                 aria-label={`Sem foto de ${nome}`}
-                className={`grid place-items-center bg-acafrao-claro font-display text-3xl font-bold text-barro/60 ${className}`}
+                className={`grid place-items-center bg-superficie-alta font-display text-3xl font-extrabold text-destaque/50 ${className}`}
             >
                 {nome?.charAt(0)?.toUpperCase()}
             </div>

@@ -20,11 +20,11 @@ export default function LoginPage() {
 
     return (
         <div className="grid min-h-screen lg:grid-cols-2">
-            <aside className="relative hidden overflow-hidden bg-cafe lg:block">
+            <aside className="relative hidden overflow-hidden bg-fundo lg:block">
                 <img src={fotos.login} alt="" className="absolute inset-0 size-full object-cover opacity-60" />
-                <div className="absolute inset-0 bg-gradient-to-t from-cafe via-cafe/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-fundo via-fundo/40 to-transparent" />
                 <div className="absolute bottom-0 p-12">
-                    <p className="font-display text-4xl font-bold leading-tight text-white">
+                    <p className="font-display text-4xl leading-tight font-extrabold uppercase text-white">
                         O cardápio certo,
                         <br />
                         no ar em segundos.
@@ -38,9 +38,9 @@ export default function LoginPage() {
                 <div className="w-full max-w-sm">
                     <Marca subtitulo="Área do gerente" />
                     <h1 className={`mt-10 text-3xl ${tituloDisplay}`}>Entrar</h1>
-                    <p className="mt-1 text-sm text-cafe-claro">Use o e-mail e a senha do gerente.</p>
+                    <p className="mt-1 text-sm text-texto-suave">Use o e-mail e a senha do gerente.</p>
                     <FormularioLogin />
-                    <Link to={rotas.cardapio()} className="mt-8 inline-block text-sm font-semibold text-barro hover:text-barro-escuro">
+                    <Link to={rotas.cardapio()} className="mt-8 inline-block text-sm font-semibold text-destaque hover:text-destaque-forte">
                         ← Voltar ao cardápio
                     </Link>
                 </div>

@@ -50,6 +50,7 @@ function valoresIniciais(prato, categoriaId) {
         imagem_url: prato?.imagem_url ?? '',
         preco: prato ? String(prato.preco) : '',
         disponivel: prato?.disponivel ?? true,
+        destaque: prato?.destaque ?? false,
     };
 }
 
@@ -61,6 +62,15 @@ function montarDadosParaEnvio(valores) {
         descricao: valores.descricao || null,
         imagem_url: valores.imagem_url || null,
     };
+}
+
+function CaixaDeSelecao({ nome, marcada, aoMudar, children }) {
+    return (
+        <label className="mb-2 flex items-center gap-2 text-sm text-texto">
+            <input type="checkbox" name={nome} checked={marcada} onChange={aoMudar} className="size-4 accent-destaque" />
+            {children}
+        </label>
+    );
 }
 
 function FormularioPrato({ categoriaId, categorias, prato }) {
@@ -120,14 +130,16 @@ function FormularioPrato({ categoriaId, categorias, prato }) {
                     erro={erros.imagem_url}
                     ajuda="Cole o link de uma imagem que comece com https://."
                 />
-                <label className="flex items-center gap-2 text-sm text-cafe">
-                    <input type="checkbox" name="disponivel" checked={valores.disponivel} onChange={alterarCampo} className="size-4 accent-barro" />
+                <CaixaDeSelecao nome="disponivel" marcada={valores.disponivel} aoMudar={alterarCampo}>
                     Disponível hoje (desmarque quando o prato acabar)
-                </label>
+                </CaixaDeSelecao>
+                <CaixaDeSelecao nome="destaque" marcada={valores.destaque} aoMudar={alterarCampo}>
+                    Destaque da casa (aparece no carrossel do cardápio)
+                </CaixaDeSelecao>
                 <BotoesFormulario enviando={formulario.enviando} voltarPara={rotas.pratos(categoriaId)} />
             </div>
             <div className="mt-6 md:mt-0">
-                <p className="mb-1 text-sm font-semibold text-cafe">Pré-visualização</p>
+                <p className="mb-1 text-sm font-semibold text-texto">Pré-visualização</p>
                 <ImagemPrato key={valores.imagem_url} url={valores.imagem_url} nome={valores.nome || 'Prato'} className="aspect-[4/3] w-full rounded-xl" />
             </div>
         </form>

@@ -20,13 +20,13 @@ A proprietária mantém o cardápio organizado por **categorias** e **pratos**. 
 ## Entidades
 
 - **Categoria**: `nome` (obrigatório, único), `descricao`
-- **Prato**: `nome` (obrigatório), `descricao`, `imagem_url` (https), `preco` (> 0), `disponivel`, `categoria_id`
+- **Prato**: `nome` (obrigatório), `descricao`, `imagem_url` (https), `preco` (> 0), `disponivel`, `destaque`, `categoria_id`
 
 Relação 1:N: uma categoria reúne vários pratos e cada prato pertence a uma categoria. Veja as [migrations](database/migrations).
 
 ## Áreas do site
 
-- **Pública** (`/`): cardápio com fotos, só com os pratos disponíveis.
+- **Pública** (`/`): cardápio no estilo aplicativo, com tema escuro, busca (ignora acentos), abas de categoria que acompanham a rolagem, carrossel "Destaques da casa" e lista com fotos. Só mostra os pratos disponíveis.
 - **Gerente** (`/admin`, exige login em `/login`): CRUD de categorias e pratos.
 
 Não há cadastro público de usuários. A conta do gerente é criada pelo [AdministradorSeeder](database/seeders/AdministradorSeeder.php) a partir de `ADMIN_EMAIL` e `ADMIN_PASSWORD`. A autenticação usa o Laravel Sanctum no modo SPA: cookie de sessão HttpOnly, proteção CSRF e limite de 5 tentativas de login por minuto.
@@ -129,7 +129,6 @@ Fotos ilustrativas do [Unsplash](https://unsplash.com), sob a [Licença Unsplash
 
 | Uso | Fotógrafo(a) | ID da foto |
 |---|---|---|
-| Capa do cardápio | thiago japyassu | `1709114107937-6dec855d9ab5` |
 | Tela de login | reyvenshots | `1628521061262-19b5cdb7eee5` |
 | Frango grelhado | Bayu Syaits | `1788227372897-49ec292a9406` |
 | Carne de sol com macaxeira | Natalia Gusakova | `1678684277852-f63a7e359435` |

@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import CabecalhoPagina from '../components/CabecalhoPagina';
+import SeloDestaque from '../components/cardapio/SeloDestaque';
 import EstadoDaPagina from '../components/EstadoDaPagina';
 import ImagemPrato from '../components/ImagemPrato';
 import Mensagem from '../components/Mensagem';
@@ -47,7 +48,7 @@ export default function PratosPage() {
 
 function ListaPratos({ categoriaId, pratos, aoExcluir }) {
     if (pratos.length === 0) {
-        return <p className={`${cartao} p-8 text-center text-sm text-cafe-claro`}>Nenhum prato cadastrado nesta categoria.</p>;
+        return <p className={`${cartao} p-8 text-center text-sm text-texto-suave`}>Nenhum prato cadastrado nesta categoria.</p>;
     }
 
     return (
@@ -57,11 +58,12 @@ function ListaPratos({ categoriaId, pratos, aoExcluir }) {
                     <ImagemPrato url={prato.imagem_url} nome={prato.nome} className="size-20 shrink-0 rounded-xl" />
                     <div className="min-w-40 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
-                            <h2 className="font-display text-lg font-semibold text-cafe">{prato.nome}</h2>
+                            <h2 className="font-display text-base font-extrabold uppercase text-texto">{prato.nome}</h2>
                             <SeloDisponibilidade disponivel={prato.disponivel} />
+                            {prato.destaque && <SeloDestaque />}
                         </div>
-                        {prato.descricao && <p className="text-sm text-cafe-claro">{prato.descricao}</p>}
-                        <p className="mt-1 font-display text-lg font-bold text-barro">{formatarPreco(prato.preco)}</p>
+                        {prato.descricao && <p className="text-sm text-texto-suave">{prato.descricao}</p>}
+                        <p className="mt-1 font-display text-lg font-bold text-destaque">{formatarPreco(prato.preco)}</p>
                     </div>
                     <div className="flex gap-2">
                         <Link to={rotas.editarPrato(categoriaId, prato.id)} className={botao.secundario}>Editar</Link>
@@ -76,7 +78,7 @@ function ListaPratos({ categoriaId, pratos, aoExcluir }) {
 }
 
 function SeloDisponibilidade({ disponivel }) {
-    const estilo = disponivel ? 'bg-folha-claro text-folha' : 'bg-creme-escuro text-cafe-claro';
+    const estilo = disponivel ? 'bg-sucesso/15 text-sucesso' : 'bg-superficie-alta text-texto-suave';
     return (
         <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${estilo}`}>
             {disponivel ? 'Disponível' : 'Esgotado'}

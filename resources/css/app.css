@@ -4,27 +4,41 @@
 @source '../../storage/framework/views/*.php';
 
 /*
- * Paleta "cozinha do sertão": barro de panela, açafrão, folha de bananeira e café,
- * sobre um fundo creme de farinha de mandioca.
+ * Tema escuro "panela de barro": fundo café quase preto, cartões em marrom tostado
+ * e o açafrão como cor de destaque (botões ativos, preços, barras de seção).
+ * Os nomes são semânticos para que telas e componentes não dependam de cores fixas.
  */
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+    --font-display: 'Archivo', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
 
-    --color-creme: #fbf4e8;
-    --color-creme-escuro: #efe2c9;
-    --color-barro: #b4472b;
-    --color-barro-escuro: #8e3520;
-    --color-acafrao: #e2a63b;
-    --color-acafrao-claro: #f8e3b4;
-    --color-folha: #3d6b45;
-    --color-folha-claro: #dcebd8;
-    --color-cafe: #2b1d16;
-    --color-cafe-claro: #6f5a4e;
+    --color-fundo: #120c08;
+    --color-superficie: #1d1510;
+    --color-superficie-alta: #2a1f17;
+    --color-borda: #3a2b20;
+    --color-texto: #f6eee3;
+    --color-texto-suave: #b9a898;
+    --color-destaque: #f2b134;
+    --color-destaque-forte: #ffc85a;
+    --color-sobre-destaque: #1a1209;
+    --color-perigo: #e86b4f;
+    --color-sucesso: #7cc68a;
+}
+
+:root {
+    color-scheme: dark;
 }
 
 body {
-    background-color: var(--color-creme);
-    color: var(--color-cafe);
+    background-color: var(--color-fundo);
+    color: var(--color-texto);
+}
+
+/* Esconde a barra de rolagem horizontal das listas de abas, mantendo a rolagem. */
+.sem-barra-rolagem {
+    scrollbar-width: none;
+}
+.sem-barra-rolagem::-webkit-scrollbar {
+    display: none;
 }

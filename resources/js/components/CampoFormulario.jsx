@@ -6,13 +6,13 @@ import { campoEntrada } from '../utils/estilos';
 export default function CampoFormulario({ rotulo, nome, erro, ajuda, multilinha = false, opcoes, obrigatorio = false, ...propriedades }) {
     const Elemento = opcoes ? 'select' : multilinha ? 'textarea' : 'input';
     const idErro = `${nome}-erro`;
-    const borda = erro ? 'border-barro' : 'border-creme-escuro';
+    const borda = erro ? 'border-perigo' : 'border-borda';
 
     return (
         <div className="mb-4">
-            <label htmlFor={nome} className="mb-1 block text-sm font-semibold text-cafe">
+            <label htmlFor={nome} className="mb-1 block text-sm font-semibold text-texto">
                 {rotulo}
-                {obrigatorio && <span className="text-barro"> *</span>}
+                {obrigatorio && <span className="text-destaque"> *</span>}
             </label>
             <Elemento
                 id={nome}
@@ -28,9 +28,9 @@ export default function CampoFormulario({ rotulo, nome, erro, ajuda, multilinha 
                     </option>
                 ))}
             </Elemento>
-            {ajuda && !erro && <p className="mt-1 text-xs text-cafe-claro">{ajuda}</p>}
+            {ajuda && !erro && <p className="mt-1 text-xs text-texto-suave">{ajuda}</p>}
             {erro && (
-                <p id={idErro} className="mt-1 text-sm font-medium text-barro">
+                <p id={idErro} className="mt-1 text-sm font-medium text-perigo">
                     {erro}
                 </p>
             )}

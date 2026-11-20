@@ -5,7 +5,7 @@ import Marca from './Marca';
 
 function linkDoMenu({ isActive }) {
     const base = 'rounded-full px-3 py-1.5 text-sm font-semibold transition';
-    return isActive ? `${base} bg-barro text-white` : `${base} text-cafe-claro hover:bg-creme-escuro`;
+    return isActive ? `${base} bg-destaque text-sobre-destaque` : `${base} text-texto-suave hover:bg-superficie-alta`;
 }
 
 export default function LayoutAdmin() {
@@ -19,7 +19,7 @@ export default function LayoutAdmin() {
 
     return (
         <div className="min-h-screen">
-            <header className="border-b border-creme-escuro bg-white/80 backdrop-blur">
+            <header className="border-b border-borda bg-fundo/90 backdrop-blur">
                 <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
                     <Link to={rotas.categorias()}>
                         <Marca subtitulo="Painel do gerente" />
@@ -31,8 +31,8 @@ export default function LayoutAdmin() {
                         <a href={rotas.cardapio()} target="_blank" rel="noreferrer" className={linkDoMenu({ isActive: false })}>
                             Ver cardápio
                         </a>
-                        <span className="mx-2 hidden h-5 w-px bg-creme-escuro sm:block" />
-                        <span className="hidden text-sm text-cafe-claro sm:inline">{usuario?.nome}</span>
+                        <span className="mx-2 hidden h-5 w-px bg-borda sm:block" />
+                        <span className="hidden text-sm text-texto-suave sm:inline">{usuario?.nome}</span>
                         <button type="button" onClick={aoSair} className={linkDoMenu({ isActive: false })}>
                             Sair
                         </button>
