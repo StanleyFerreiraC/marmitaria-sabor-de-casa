@@ -4,8 +4,9 @@ Trabalho da disciplina **N695 - Desenvolvimento de Plataformas Web** (Unifor), *
 
 A proprietária mantém o cardápio organizado por **categorias** e **pratos**. Quando um prato acaba ou muda de preço, ela atualiza no sistema e o cardápio público (`/cardapio`) passa a mostrar a versão correta na hora, no lugar da foto antiga do quadro.
 
-- **Aplicação publicada:** _preencher_
-- **Repositório:** _preencher_
+- **Aplicação publicada:** https://sabor-de-casa.147.15.94.117.sslip.io
+- **Cardápio público:** https://sabor-de-casa.147.15.94.117.sslip.io/cardapio
+- **Repositório:** https://github.com/StanleyFerreiraC/marmitaria-sabor-de-casa
 
 ## Stack
 
@@ -14,7 +15,7 @@ A proprietária mantém o cardápio organizado por **categorias** e **pratos**. 
 | Interface | React 19 + React Router, Tailwind CSS, Vite |
 | Serviço web | Laravel 13 (PHP 8.3), API REST em JSON |
 | Persistência | Banco relacional via Eloquent ORM: PostgreSQL em produção, SQLite no desenvolvimento |
-| Hospedagem | Render (Docker) + Neon (PostgreSQL) |
+| Hospedagem | VPS com Coolify (container Docker + PostgreSQL 17) |
 
 ## Entidades
 
