@@ -4,12 +4,19 @@ namespace Tests\Feature;
 
 use App\Models\Categoria;
 use App\Models\Prato;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CategoriaApiTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(User::factory()->create());
+    }
 
     public function test_lista_categorias_com_quantidade_de_pratos(): void
     {
@@ -63,7 +70,7 @@ class CategoriaApiTest extends TestCase
 
         $this->deleteJson("/api/categorias/{$categoria->id}")
             ->assertConflict()
-            ->assertJsonPath('message', 'Não é possível excluir uma categoria que ainda possui pratos. Exclua ou mova os pratos antes.');
+            ->assertJsonPath('message', 'Não é possível excluir uma categoria que ainda possui pratos. Exclua os pratos ou mova-os para outra categoria antes.');
 
         $this->assertDatabaseHas('categorias', ['id' => $categoria->id]);
     }

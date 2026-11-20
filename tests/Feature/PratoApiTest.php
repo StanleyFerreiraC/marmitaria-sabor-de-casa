@@ -4,12 +4,19 @@ namespace Tests\Feature;
 
 use App\Models\Categoria;
 use App\Models\Prato;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PratoApiTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(User::factory()->create());
+    }
 
     public function test_lista_apenas_pratos_da_categoria(): void
     {
@@ -63,6 +70,40 @@ class PratoApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('data.preco', 12.9)
             ->assertJsonPath('data.disponivel', false);
+    }
+
+    public function test_move_prato_para_outra_categoria(): void
+    {
+        $destino = Categoria::factory()->create();
+        $prato = Prato::factory()->create();
+
+        $this->putJson("/api/pratos/{$prato->id}", ['categoria_id' => $destino->id, 'nome' => $prato->nome, 'preco' => 10])
+            ->assertOk()
+            ->assertJsonPath('data.categoria_id', $destino->id);
+    }
+
+    public function test_cadastro_usa_a_categoria_da_rota(): void
+    {
+        $categoria = Categoria::factory()->create();
+        $outra = Categoria::factory()->create();
+
+        $this->postJson("/api/categorias/{$categoria->id}/pratos", ['categoria_id' => $outra->id, 'nome' => 'Teste', 'preco' => 5])
+            ->assertCreated()
+            ->assertJsonPath('data.categoria_id', $categoria->id);
+    }
+
+    public function test_aceita_apenas_imagem_com_https(): void
+    {
+        $categoria = Categoria::factory()->create();
+        $url = "/api/categorias/{$categoria->id}/pratos";
+
+        $this->postJson($url, ['nome' => 'Teste', 'preco' => 5, 'imagem_url' => 'http://exemplo.com/foto.jpg'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['imagem_url']);
+
+        $this->postJson($url, ['nome' => 'Teste', 'preco' => 5, 'imagem_url' => 'https://exemplo.com/foto.jpg'])
+            ->assertCreated()
+            ->assertJsonPath('data.imagem_url', 'https://exemplo.com/foto.jpg');
     }
 
     public function test_exclui_prato(): void

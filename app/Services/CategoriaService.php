@@ -42,7 +42,7 @@ class CategoriaService
         return Categoria::query()
             ->whereHas('pratos', fn ($query) => $query->where('disponivel', true))
             ->with(['pratos' => fn ($query) => $query->where('disponivel', true)->orderBy('nome')])
-            ->orderBy('nome')
+            ->orderBy('id') // ordem de cadastro: as marmitas, cadastradas primeiro, abrem o cardápio
             ->get();
     }
 }

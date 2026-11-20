@@ -13,9 +13,12 @@ class PratoService
         return $categoria->pratos()->orderBy('nome')->get();
     }
 
+    /**
+     * No cadastro, a categoria vem da rota (/categorias/{categoria}/pratos).
+     */
     public function criar(Categoria $categoria, array $dados): Prato
     {
-        return $categoria->pratos()->create($dados);
+        return $categoria->pratos()->create(array_merge($dados, ['categoria_id' => $categoria->id]));
     }
 
     public function atualizar(Prato $prato, array $dados): Prato

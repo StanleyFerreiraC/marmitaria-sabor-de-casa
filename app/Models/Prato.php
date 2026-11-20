@@ -12,7 +12,7 @@ class Prato extends Model
 
     protected $table = 'pratos';
 
-    protected $fillable = ['nome', 'descricao', 'preco', 'disponivel'];
+    protected $fillable = ['categoria_id', 'nome', 'descricao', 'imagem_url', 'preco', 'disponivel'];
 
     protected $attributes = ['disponivel' => true];
 

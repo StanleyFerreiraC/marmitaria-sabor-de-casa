@@ -14,6 +14,7 @@ class PratoResource extends JsonResource
             'categoria_id' => $this->categoria_id,
             'nome' => $this->nome,
             'descricao' => $this->descricao,
+            'imagem_url' => $this->imagem_url,
             'preco' => (float) $this->preco,
             'disponivel' => $this->disponivel,
         ];

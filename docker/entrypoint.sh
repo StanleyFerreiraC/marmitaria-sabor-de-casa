@@ -12,6 +12,9 @@ php artisan route:cache
 php artisan view:cache
 php artisan migrate --force
 
+# Conta do gerente, a partir de ADMIN_EMAIL/ADMIN_PASSWORD (a senha da variável sempre prevalece).
+php artisan db:seed --class=AdministradorSeeder --force
+
 # Dados de exemplo: defina SEMEAR_DADOS=true só no primeiro deploy.
 if [ "${SEMEAR_DADOS}" = "true" ]; then
     php artisan db:seed --force
