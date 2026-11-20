@@ -89,26 +89,23 @@ Durante o desenvolvimento, rode `npm run dev` em outro terminal para recarregar 
 
 Testes automatizados da API: `php artisan test`
 
-## Publicação (Render + Neon)
+## Publicação
 
-1. Crie um banco PostgreSQL gratuito no [Neon](https://neon.tech) e copie a connection string.
-2. No [Render](https://render.com), crie um **Web Service** a partir deste repositório, com runtime **Docker**.
-3. Configure as variáveis de ambiente:
+A aplicação roda em uma VPS gerenciada pelo [Coolify](https://coolify.io), que constrói a imagem a partir do [Dockerfile](Dockerfile) deste repositório. O PostgreSQL roda em outro container no mesmo servidor, e o Traefik do Coolify cuida do HTTPS.
 
-   | Variável | Valor |
-   |---|---|
-   | `APP_KEY` | saída de `php artisan key:generate --show` |
-   | `APP_ENV` | `production` |
-   | `APP_DEBUG` | `false` |
-   | `APP_URL` | URL gerada pelo Render |
-   | `DB_CONNECTION` | `pgsql` |
-   | `DB_URL` | connection string do Neon (com `?sslmode=require`) |
-   | `LOG_CHANNEL` | `stderr` |
-   | `SEMEAR_DADOS` | `true` no primeiro deploy; depois remova |
+Variáveis de ambiente do container:
 
-4. O container roda as migrations sozinho ao iniciar ([entrypoint.sh](docker/entrypoint.sh)).
+| Variável | Valor |
+|---|---|
+| `APP_KEY` | saída de `php artisan key:generate --show` |
+| `APP_ENV` / `APP_DEBUG` | `production` / `false` |
+| `APP_URL` | URL pública da aplicação |
+| `DB_CONNECTION` | `pgsql` |
+| `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | dados do container PostgreSQL |
+| `LOG_CHANNEL` | `stderr` |
+| `SEMEAR_DADOS` | `true` só no primeiro deploy (carrega o cardápio de exemplo) |
 
-Observação: no plano gratuito do Render o serviço "dorme" após um tempo sem acesso, e a primeira requisição pode levar cerca de 1 minuto. Abra o link antes de apresentar.
+Ao iniciar, o container roda as migrations sozinho ([entrypoint.sh](docker/entrypoint.sh)). O mesmo Dockerfile também funciona em outras hospedagens que aceitam Docker, como Render ou Railway.
 
 ## Uso de IA generativa
 
