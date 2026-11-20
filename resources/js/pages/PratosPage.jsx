@@ -55,7 +55,7 @@ function TabelaPratos({ categoriaId, pratos, aoExcluir }) {
                     <tr>
                         <th className="px-4 py-3">Prato</th>
                         <th className="px-4 py-3">Preço</th>
-                        <th className="px-4 py-3">Situação</th>
+                        <th className="hidden px-4 py-3 sm:table-cell">Situação</th>
                         <th className="px-4 py-3 text-right">Ações</th>
                     </tr>
                 </thead>
@@ -65,11 +65,12 @@ function TabelaPratos({ categoriaId, pratos, aoExcluir }) {
                             <td className="px-4 py-3">
                                 <p className="font-medium text-stone-900">{prato.nome}</p>
                                 {prato.descricao && <p className="text-stone-500">{prato.descricao}</p>}
+                                <div className="mt-1 sm:hidden"><SeloDisponibilidade disponivel={prato.disponivel} /></div>
                             </td>
                             <td className="whitespace-nowrap px-4 py-3">{formatarPreco(prato.preco)}</td>
-                            <td className="px-4 py-3"><SeloDisponibilidade disponivel={prato.disponivel} /></td>
+                            <td className="hidden px-4 py-3 sm:table-cell"><SeloDisponibilidade disponivel={prato.disponivel} /></td>
                             <td className="px-4 py-3">
-                                <div className="flex justify-end gap-2">
+                                <div className="flex flex-col items-end gap-2 sm:flex-row sm:justify-end">
                                     <Link to={`/categorias/${categoriaId}/pratos/${prato.id}/editar`} className={botao.secundario}>
                                         Editar
                                     </Link>

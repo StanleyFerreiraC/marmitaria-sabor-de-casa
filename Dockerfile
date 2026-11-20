@@ -34,4 +34,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
+EXPOSE 80
 CMD ["entrypoint"]
